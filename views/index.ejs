@@ -25,6 +25,7 @@
       <label for="tab">Add Family Member</label>
     </form>
 
+    <% if(locals.enterCountryBlock){ %>
     <form action="/add" method="post">
       <input
         type="text"
@@ -34,6 +35,7 @@
       />
       <button type="submit" style="background-color: <%= color %>">Add</button>
     </form>
+    <% } %>
 
     <section class="ag-canvas">
       <svg
@@ -926,14 +928,16 @@
         />
       </svg>
     </section>
+    <% if(locals.total){ %>
     <h2 class="total-count">Total Countries: <%=total%></h2>
+    <% } %>
     <script>
-      const country_codes = "<%= countries %>".split(",");
-      console.log(typeof "<%= countries %>");
-      // document.getElementById("IN").style.fill = "<%= color %>";
-      country_codes.forEach((code) => {
-        document.getElementById(code).style.fill = "<%= color %>";
-      });
+      if ("<%=countries%>") {
+        const country_codes = "<%= countries %>".split(",");
+        country_codes.forEach((code) => {
+          document.getElementById(code).style.fill = "<%= color %>";
+        });
+      }
     </script>
   </body>
 </html>
