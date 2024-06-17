@@ -27,6 +27,7 @@ async function checkVisited() {
       "SELECT country_code FROM visited_countries WHERE user_id = $1",
       [currentUserId]
     );
+    // console.log(result);
     let countries = [];
     result.rows.forEach((country) => {
       countries.push(country.country_code);
@@ -101,7 +102,7 @@ app.post("/add", async (req, res) => {
     //   [input.toLowerCase()]
     // );
     const result = await db.query(
-      "SELECT country_code FROM countries WHERE LOWER(country_name) = $1;",
+      "SELECT country_code FROM countries WHERE LOWER(country_name) LIKE $1 || '%';",
       [input.toLowerCase()]
     );
     if (result.rows.length > 0) {
@@ -152,9 +153,9 @@ app.post("/new", async (req, res) => {
   const name = req.body.name;
   const color = req.body.color;
   const main1 = async () => {
-    res.render("edit.ejs", {
+    res.render("new.ejs", {
       name: name,
-      errorMessage: "Please select a color",
+      errorMessage: "Please select a color to continue",
     });
   };
 
