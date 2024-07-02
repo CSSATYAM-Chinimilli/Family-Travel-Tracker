@@ -1,3 +1,4 @@
+//index.js
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
@@ -177,3 +178,5 @@ app.post("/new", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+// index.ejs
